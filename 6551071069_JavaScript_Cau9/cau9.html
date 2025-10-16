@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Validation</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin-top: 30px;
+      }
+      .error {
+        color: red;
+        font-size: 13px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="date"] {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Personal Information</h2>
+    <form id="myForm">
+      <div>
+        <label>Enter name*:</label>
+        <input type="text" id="name" />
+        <span class="error" id="errName"></span>
+      </div>
+      <div>
+        <label>Sex*:</label>
+        <input type="radio" name="sex" value="Male" /> Male
+        <input type="radio" name="sex" value="Female" /> Female
+        <span class="error" id="errSex"></span>
+      </div>
+      <div>
+        <label>Email address*:</label>
+        <input type="text" id="email" />
+        <span class="error" id="errEmail"></span>
+      </div>
+      <div>
+        <label>Enter birthday (MM/DD/YYYY)*:</label>
+        <input type="text" id="birthday" placeholder="mm/dd/yyyy" />
+        <span class="error" id="errBirthday"></span>
+      </div>
+      <div>
+        <label>Enter street address (line 1)*:</label>
+        <input type="text" id="street" />
+        <span class="error" id="errStreet"></span>
+      </div>
+      <div>
+        <label>Enter city*:</label>
+        <input type="text" id="city" />
+        <span class="error" id="errCity"></span>
+      </div>
+      <div>
+        <label>Select a region*:</label>
+        <select id="region">
+          <option value="">--Select--</option>
+          <option>North</option>
+          <option>South</option>
+          <option>East</option>
+          <option>West</option>
+        </select>
+        <span class="error" id="errRegion"></span>
+      </div>
+      <div>
+        <label>Enter 5-digit ZIP code*:</label>
+        <input type="text" id="zipcode" />
+        <span class="error" id="errZip"></span>
+      </div>
+      <br />
+      <button type="button" onclick="finishForm()">Finish</button>
+      <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+    <script>
+      function finishForm() {
+        let valid = true;
+        document
+          .querySelectorAll(".error")
+          .forEach((e) => (e.textContent = ""));
+        const name = document.getElementById("name").value.trim();
+        if (name === "") {
+          document.getElementById("errName").textContent = "Name is required";
+          valid = false;
+        }
+        const sex = document.querySelector('input[name="sex"]:checked');
+        if (!sex) {
+          document.getElementById("errSex").textContent = "Sex is required";
+          valid = false;
+        }
+        const email = document.getElementById("email").value.trim();
+        const emailPattern = /^[^@]+@[^@]+\.[^@]+$/;
+        if (email === "" || !emailPattern.test(email)) {
+          document.getElementById("errEmail").textContent = "Invalid email";
+          valid = false;
+        }
+        const birthday = document.getElementById("birthday").value.trim();
+        const datePattern =/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
+        if (!datePattern.test(birthday)) {
+          document.getElementById("errBirthday").textContent =
+            "Invalid date format";
+          valid = false;
+        } else {
+          const year = parseInt(birthday.split("/")[2]);
+          const currentYear = new Date().getFullYear();
+          if (year >= currentYear) {
+            document.getElementById("errBirthday").textContent =
+              "Year must be less than current year";
+            valid = false;
+          }
+        }
+        const street = document.getElementById("street").value.trim();
+        if (street === "") {
+          document.getElementById("errStreet").textContent =
+            "Street is required";
+          valid = false;
+        }
+        const city = document.getElementById("city").value.trim();
+        if (city === "") {
+          document.getElementById("errCity").textContent = "City is required";
+          valid = false;
+        }
+        const region = document.getElementById("region").value;
+        if (region === "") {
+          document.getElementById("errRegion").textContent =
+            "Region is required";
+          valid = false;
+        }
+        const zipcode = document.getElementById("zipcode").value.trim();
+        const zipPattern = /^\d{5}$/;
+        if (!zipPattern.test(zipcode)) {
+          document.getElementById("errZip").textContent =
+            "ZIP must be 5 digits";
+          valid = false;
+        }
+        if (valid) {
+          alert("Form submitted successfully!");
+        }
+      }
+      function clearForm() {
+        document.getElementById("myForm").reset();
+        document
+          .querySelectorAll(".error")
+          .forEach((e) => (e.textContent = ""));
+      }
+    </script>
+  </body>
+</html>

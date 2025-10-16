@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Máy tính đơn giản</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <h3>Máy tính đơn giản (DOM + jQuery)</h3>
+    <input type="number" id="so1" />
+    <button id="cong">+</button>
+    <button id="tru">-</button>
+    <button id="nhan">x</button>
+    <button id="chia">/</button>
+    <button id="mu">^</button>
+    <input type="number" id="so2" />
+    =
+    <input type="text" id="ketqua" readonly/>
+    <script>
+      $("#cong").click(function () {
+        var a = Number($("#so1").val());
+        var b = Number($("#so2").val());
+        $("#ketqua").val(a + b);
+      });
+      $("#tru").click(function () {
+        var a = Number($("#so1").val());
+        var b = Number($("#so2").val());
+        $("#ketqua").val(a - b);
+      });
+      $("#nhan").click(function () {
+        var a = Number($("#so1").val());
+        var b = Number($("#so2").val());
+        $("#ketqua").val(a * b);
+      });
+      $("#chia").click(function () {
+        var a = Number($("#so1").val());
+        var b = Number($("#so2").val());
+        if (b == 0) {
+          alert("Không thể chia cho 0!");
+        } else {
+          $("#ketqua").val(a / b);
+        }
+      });
+      $("#mu").click(function () {
+        var a = Number($("#so1").val());
+        var b = Number($("#so2").val());
+        $("#ketqua").val(Math.pow(a, b));
+      });
+    </script>
+  </body>
+</html>
