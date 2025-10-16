@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Theme Toggle (Light/Dark)</title>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:300,400|Oswald:400,700');
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaebeb;
+            color: black;
+            transition: background 0.6s, color 0.6s;
+        }
+        .image-effect {
+            position: relative;
+        }
+        .image-effect img {
+            position: absolute;
+            left: 0;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            height: 100vh;
+            width: 100%;
+            object-fit: cover;
+        }
+        .image-effect img.fadeEffect {
+            opacity: 1;
+        }
+        .switch-btn {
+            margin-left: 25px;
+            position: absolute;
+            bottom: 50px;
+            z-index: 10;
+            background: rgba(226, 25, 55, .6);
+            width: 300px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-radius: 15px;
+        }
+        .onoffswitch {
+            position: relative;
+            width: 90px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .onoffswitch-checkbox {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .onoffswitch-label {
+            display: block;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid #999999;
+            border-radius: 20px;
+        }
+        .onoffswitch-inner {
+            display: block;
+            width: 200%;
+            margin-left: -100%;
+            transition: margin 0.3s ease-in 0s;
+        }
+        .onoffswitch-inner:before,
+        .onoffswitch-inner:after {
+            display: block;
+            float: left;
+            width: 50%;
+            height: 30px;
+            padding: 0;
+            line-height: 30px;
+            font-size: 14px;
+            color: white;
+            font-family: Trebuchet, Arial, sans-serif;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+        .onoffswitch-inner:before {
+            content: "ON";
+            padding-left: 10px;
+            background-color: #34A7C1;
+            color: #FFFFFF;
+        }
+        .onoffswitch-inner:after {
+            content: "OFF";
+            padding-right: 10px;
+            background-color: #EEEEEE;
+            color: #999999;
+            text-align: right;
+        }
+        .onoffswitch-switch {
+            display: block;
+            width: 18px;
+            margin: 6px;
+            background: #FFFFFF;
+            position: absolute;
+            top: 2px;
+            bottom: 0;
+            right: 56px;
+            border: 2px solid #999999;
+            border-radius: 20px;
+            transition: all 0.3s ease-in 0s;
+            height: 18px;
+        }
+        .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+            margin-left: 0;
+        }
+        .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-effect" id="image-effect-2">
+    <img src="images/off.png" class="fadeEffect">  
+    <img src="images/on.png">                     
+</div>
+    <div class="switch-btn">
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox toggle-switch-2" id="myonoffswitch"
+                tabindex="0" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+        <span style="margin-left: 15px; color: white;">Toggle Theme</span>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myonoffswitch").change(function () {
+                if ($(this).is(":checked")) {
+                    $("body").css({
+                        "background-color": "#eaebeb",
+                        "color": "black"
+                    });
+                    $("#image-effect-2 img").eq(1).addClass("fadeEffect");
+                    $("#image-effect-2 img").eq(0).removeClass("fadeEffect");
+                } else {
+                    $("body").css({
+                        "background-color": "#1a1a1a",
+                        "color": "white"
+                    });
+                    $("#image-effect-2 img").eq(0).addClass("fadeEffect");
+                    $("#image-effect-2 img").eq(1).removeClass("fadeEffect");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
