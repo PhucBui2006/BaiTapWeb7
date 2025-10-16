@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tạo Tabs trong jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+      .tab-wrapper {
+        width: 500px;
+        margin: 50px auto;
+        border: solid 1px #acacac;
+      }
+      .tab-wrapper ul {
+        overflow: hidden;
+        background: #aee655;
+        margin: 0px;
+        padding: 0px;
+      }
+      .tab-wrapper ul li {
+        float: left;
+        list-style: none;
+        padding: 10px 20px;
+        background: #348ec9;
+        border-radius: 10px 10px 0px 0px;
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+      .tab-wrapper ul li.active {
+        background: #fff;
+      }
+      .tab-wrapper ul li.active a {
+        color: blue;
+      }
+      .tab-wrapper ul li a {
+        color: #fff;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .tab-content {
+        padding: 20px;
+      }
+      .tab-item {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tab-wrapper">
+      <ul class="tab">
+        <li class="active"><a href="#tab-main-info">Thông tin chính</a></li>
+        <li><a href="#tab-image">Hình ảnh</a></li>
+        <li><a href="#tab-seo">SEO</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-item" id="tab-main-info">Tab thông tin chính</div>
+        <div class="tab-item" id="tab-image">Tab hình ảnh</div>
+        <div class="tab-item" id="tab-seo">Tab SEO</div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $(".tab-item").hide();
+        $(".tab-item:first").show();
+        $(".tab li a").click(function (e) {
+          e.preventDefault();
+          $(".tab li").removeClass("active");
+          $(this).parent().addClass("active");
+          var tab_id = $(this).attr("href");
+          $(".tab-item").hide();
+          $(tab_id).fadeIn();
+        });
+      });
+    </script>
+  </body>
+</html>
