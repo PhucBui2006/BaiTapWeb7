@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chuyển hướng đến đường link (jQuery)</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <h1>Nhập đường link và nhấn "Submit" để chuyển hướng:</h1>
+    <form name="myForm">
+      <input type="text" id="linkInput" placeholder="Nhập đường link" />
+      <input type="button" id="btnSubmit" value="Submit" />
+    </form>
+    <script>
+      $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+          var link = $("#linkInput").val();
+          if (link == "") {
+            alert("Vui lòng nhập đường link!");
+            return;
+          }
+          var hoi = confirm("Bạn có muốn chuyển đến trang này không?\n" + link);
+          if (hoi == true) {
+            window.location = link;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

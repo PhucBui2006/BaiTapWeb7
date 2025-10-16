@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Count and display items (jQuery)</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        margin: 30px;
+        font-family: Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      Select your favorite Color :
+      <select id="mySelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>Blue</option>
+        <option>White</option>
+      </select>
+      <input type="button" id="btnCount" value="Count and Output all items" />
+    </form>
+    <script>
+      $(document).ready(function () {
+        $("#btnCount").click(function () {
+          const options = $("#mySelect option"); 
+          const count = options.length;
+          let message = "Tổng cộng có " + count + " mục:\n";
+          options.each(function (index, option) {
+            message += "- " + $(option).text() + "\n";
+          })
+          alert(message);
+        });
+      });
+    </script>
+  </body>
+</html>
